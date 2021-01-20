@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/currentWeatherFragment2">
+    app:startDestination="@id/currentWeatherFragment">
     <fragment
-        android:id="@+id/currentWeatherFragment2"
+        android:id="@+id/currentWeatherFragment"
         android:name="com.example.weatherstate.ui.weather.current.CurrentWeatherFragment"
-        android:label="current_weather_fragment"
+        android:label="currentWeatherFragment"
         tools:layout="@layout/current_weather_fragment" />
     <fragment
-        android:id="@+id/futureListWeatherFragment2"
+        android:id="@+id/futureListWeatherFragment"
         android:name="com.example.weatherstate.ui.weather.Future.list.FutureListWeatherFragment"
-        android:label="future_list_weather_fragment"
+        android:label="futureListWeatherFragment"
         tools:layout="@layout/future_list_weather_fragment" />
     <fragment
         android:id="@+id/futureDetailWeatherFragment"
         android:name="com.example.weatherstate.ui.weather.Future.detail.FutureDetailWeatherFragment"
-        android:label="future_detail_weather_fragment"
+        android:label="futureDetailWeatherFragment"
         tools:layout="@layout/future_detail_weather_fragment" />
     <fragment
         android:id="@+id/settingsFragment"
