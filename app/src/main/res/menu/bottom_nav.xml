@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/currentWeatherFragment"
+        android:icon="@drawable/ic_baseline_today_24"
+        android:title="Today"
+        />
+    <item
+        android:id="@+id/futureListWeatherFragment"
+        android:icon="@drawable/ic_baseline_settings_system_daydream_24"
+        android:title="7 Days"
+        />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_baseline_settings_brightness_24"
+        android:title="Settings"
+        />
+
+</menu>
