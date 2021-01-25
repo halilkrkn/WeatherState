@@ -1,4 +1,4 @@
-package com.example.weatherstate.data.response
+package com.example.weatherstate.data.db.entity
 
 
 import com.google.gson.annotations.SerializedName
@@ -13,7 +13,7 @@ data class Location(
     val name: String,
     val region: String,
     @SerializedName("timezone_id")
-    val timezoneİd: String,
+    val timezoneId: String,
     @SerializedName("utc_offset")
     val utcOffset: String
 )

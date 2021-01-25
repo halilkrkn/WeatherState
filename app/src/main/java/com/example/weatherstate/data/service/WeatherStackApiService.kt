@@ -1,7 +1,6 @@
 package com.example.weatherstate.data.service
 
-import android.telephony.cdma.CdmaCellLocation
-import com.example.weatherstate.data.response.CurrentWeatherResponse
+import com.example.weatherstate.data.network.response.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -11,9 +10,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val API_KEY = "651ccaea42ebedb6d9caa37582355229"
-
 // http://api.weatherstack.com/current?access_key=651ccaea42ebedb6d9caa37582355229&query=Ankara&Lang=tr
+const val API_KEY = "651ccaea42ebedb6d9caa37582355229"
+const val BASE_URL ="http://api.weatherstack.com/"
+
+
+// Bu oluşturduğumuz interface ile bir sevis olluşturduk ve api üzerindeki verileri sağlıklı ve düzenli bir şekilde çekmemize yarıyacak kodları yazdık.
+
 interface WeatherStackApiService {
 
     @GET("current")
@@ -29,6 +32,7 @@ interface WeatherStackApiService {
     companion object{
 
         operator fun invoke(): WeatherStackApiService {
+            // TODO: 25.01.2021 Interceptor = Önleyiciler, aramaları izleyebilen, yeniden yazabilen ve yeniden deneyebilen güçlü bir mekanizmadır.
             val requestInterceptor = Interceptor {chain ->
                 val url = chain.request()
                         .url()
@@ -49,7 +53,7 @@ interface WeatherStackApiService {
 
             return Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl("http://api.weatherstack.com/")
+                    .baseUrl(BASE_URL)
                     .addCallAdapterFactory(CoroutineCallAdapterFactory())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
