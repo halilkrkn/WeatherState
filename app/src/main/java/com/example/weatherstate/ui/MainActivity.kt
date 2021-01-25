@@ -16,9 +16,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-     //setSupportActionBar(toolbar)
+     //setSupportActionBar(toolbar)hatırlamak
+
+        //Gezinme Denetleyicisini Bulma
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+
+        // BottomNavigationView ile Gezinme Denetleyicisini Ayarlama işlemi yapıldı.
         bottom_nav.setupWithNavController(navController)
+        // ActionBar'ı Gezinme Denetleyicisi ile Ayarlama işlemi yapıldı
         NavigationUI.setupActionBarWithNavController(this,navController)
     }
 
