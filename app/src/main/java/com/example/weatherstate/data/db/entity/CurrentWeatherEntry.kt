@@ -8,10 +8,6 @@ import com.google.gson.annotations.SerializedName
 
 const val CURRENT_WEATHER_ID = 0
 
-//Entity = Modelimizi temsil eder. Model sınıfının adı tablo adını alır.
-//Bknz:https://medium.com/@cagataygull/room-k%C3%BCt%C3%BCphanesi-nedir-nas%C4%B1l-kullan%C4%B1l%C4%B1r-android-kotlin-2bc378107c05
-//Bknz: https://medium.com/@s.sunayyildiz/room-nedir-android-studio-34ce4cd43b03
-//Bknz: https://developer.android.com/training/data-storage/room
 @Entity(tableName = "current_weather")
 data class CurrentWeatherEntry(
     val feelslike: Double,
@@ -45,3 +41,8 @@ data class CurrentWeatherEntry(
     var id: Int = CURRENT_WEATHER_ID
 
 }
+
+//Entity = Modelimizi temsil eder. Model sınıfının adı tablo adını alır.
+//Bknz:https://medium.com/@cagataygull/room-k%C3%BCt%C3%BCphanesi-nedir-nas%C4%B1l-kullan%C4%B1l%C4%B1r-android-kotlin-2bc378107c05
+//Bknz: https://medium.com/@s.sunayyildiz/room-nedir-android-studio-34ce4cd43b03
+//Bknz: https://developer.android.com/training/data-storage/room
