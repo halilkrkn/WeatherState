@@ -1,5 +1,6 @@
-package com.example.weatherstate.data.service
+package com.example.weatherstate.data.network.service
 
+import com.example.weatherstate.data.network.ConnectivityInterceptor
 import com.example.weatherstate.data.network.response.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -24,15 +25,16 @@ interface WeatherStackApiService {
         @Query("query") location: String,
         @Query("lang")  languageCode: String ="tr"
     ): Deferred<CurrentWeatherResponse>
-    // TODO: 25.01.2021
-    //  Yani Deferred(ertelenmiş değer) aslında Job(iş)tir.
-    //  Ertelenmiş değer, engellemeyen, iptal edilebilir bir gelecektir - sonucu olan bir İştir.
-    //  Deferred: bir durumu başlattıktan sonra bir noktada bitecek olan bir işlemi kapsüller.
+
 
     companion object{
 
-        operator fun invoke(): WeatherStackApiService {
-            // TODO: 25.01.2021 Interceptor = Önleyiciler, aramaları izleyebilen, yeniden yazabilen ve yeniden deneyebilen güçlü bir mekanizmadır.
+        operator fun invoke(
+
+                connectivityInterceptor: ConnectivityInterceptor
+
+        ): WeatherStackApiService {
+
             val requestInterceptor = Interceptor {chain ->
                 val url = chain.request()
                         .url()
@@ -49,6 +51,7 @@ interface WeatherStackApiService {
             
             val okHttpClient = OkHttpClient.Builder()
                     .addInterceptor(requestInterceptor)
+                    .addInterceptor(connectivityInterceptor)
                     .build()
 
             return Retrofit.Builder()
@@ -61,3 +64,13 @@ interface WeatherStackApiService {
         }
     }
 }
+
+
+
+// TODO: 25.01.2021
+//  Yani Deferred(ertelenmiş değer) aslında Job(iş)tir.
+//  Ertelenmiş değer, engellemeyen, iptal edilebilir bir gelecektir - sonucu olan bir İştir.
+//  Deferred: bir durumu başlattıktan sonra bir noktada bitecek olan bir işlemi kapsüller.
+
+
+// TODO: 25.01.2021 Interceptor = Önleyiciler, aramaları izleyebilen, yeniden yazabilen ve yeniden deneyebilen güçlü bir mekanizmadır.
