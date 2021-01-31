@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e6da8a7a76bf9bfe2a9c58a17ccadfb6",
+    "identityHash": "484a512e099cb542fecbc6204f641352",
     "entities": [
       {
         "tableName": "current_weather",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`dbId` INTEGER NOT NULL, `feelslike` REAL NOT NULL, `isDay` TEXT NOT NULL, `precip` REAL NOT NULL, `temperature` REAL NOT NULL, `visibility` REAL NOT NULL, `windDir` TEXT NOT NULL, `windSpeed` REAL NOT NULL, `condition_Text` TEXT NOT NULL, `condition_Icon` TEXT NOT NULL, `condition_Code` INTEGER NOT NULL, PRIMARY KEY(`dbId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`dbId` INTEGER NOT NULL, `feelslike` REAL NOT NULL, `isDay` TEXT NOT NULL, `precip` REAL NOT NULL, `temperature` REAL NOT NULL, `visibility` REAL NOT NULL, `windDir` TEXT NOT NULL, `windSpeed` REAL NOT NULL, `condition_Text` TEXT NOT NULL, `condition_Icon` TEXT NOT NULL, `condition_Code` TEXT NOT NULL, PRIMARY KEY(`dbId`))",
         "fields": [
           {
             "fieldPath": "dbId",
@@ -71,7 +71,7 @@
           {
             "fieldPath": "condition.Code",
             "columnName": "condition_Code",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           }
         ],
@@ -88,7 +88,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e6da8a7a76bf9bfe2a9c58a17ccadfb6')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '484a512e099cb542fecbc6204f641352')"
     ]
   }
 }

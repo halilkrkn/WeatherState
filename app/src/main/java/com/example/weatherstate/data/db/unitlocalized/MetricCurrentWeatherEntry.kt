@@ -5,9 +5,9 @@ import androidx.room.ColumnInfo
 class MetricCurrentWeatherEntry(
         @ColumnInfo(name ="temperature")
         override val temperature: Double,
-//        @ColumnInfo(name ="weatherDescriptions")
+//        @ColumnInfo(name ="condition_text")
 //        override val conditionText: String,
-//        @ColumnInfo(name ="weatherIcons")
+//        @ColumnInfo(name ="condition_icon")
 //        override val conditionIcon: String,
         @ColumnInfo(name ="windSpeed")
         override val windSpeed: Double,

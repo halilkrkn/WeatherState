@@ -43,7 +43,8 @@ data class CurrentWeatherEntry(
 
 // Entity = Modelimizi temsil eder. Model sınıfının adı tablo adını alır.
 // Bknz: https://medium.com/@cagataygull/room-k%C3%BCt%C3%BCphanesi-nedir-nas%C4%B1l-kullan%C4%B1l%C4%B1r-android-kotlin-2bc378107c05
-// Bknz: https://medium.com/@s.sunayyildiz/room-nedir-android-studio-34ce4cd43b03
+// Bknz: https://speednet.pl/blog/room-persistence-library-introduction-part-1/
+// Bknz: https://speednet.pl/blog/room-persistence-library-introduction-part-2/
 // Bknz: https://developer.android.com/training/data-storage/room
 // Bknz: https://developer.android.com/jetpack/androidx/releases/room
 // Bknz: https://mertkesgin.com/room-database/

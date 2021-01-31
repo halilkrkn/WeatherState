@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
 
 
+
 // Room’un beyin kısmıdır.
 // Verilerin kalıcı olarak tutulması için temel oluşturur.
 // Veritabanını yönetir
@@ -16,12 +17,10 @@ import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
         version = 1,
 
 )
-
 //Database sınıfımız abstract olmalı ve RoomDatabase‘den türetilmelidir.
 //Database ile alakalı tüm entity sınıfları burada belirtilmelidir.
 //@Dao sınıflarımız abstract fun olarak Database içinde oluşturulmalı.
 //Runtime’da, Room.databaseBuilder() ya da Room.inMemoryDatabaseBuilder() çağırarak da Database oluşturabiliriz
-
 abstract class WeatherStateDatabase: RoomDatabase() {
 
     abstract fun getCurrentWeatherDao(): CurrentWeatherDao
