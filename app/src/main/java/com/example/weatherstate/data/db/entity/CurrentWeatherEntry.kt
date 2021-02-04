@@ -1,15 +1,16 @@
 package com.example.weatherstate.data.db.entity
 
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
+import androidx.room.TypeConverters
+import com.example.weatherstate.data.db.converter.CurrentWeatherEntryConverters
 import com.google.gson.annotations.SerializedName
 
 const val CURRENT_WEATHER_ID = 0
 
 @Entity(tableName = "current_weather")
+//@TypeConverters(CurrentWeatherEntryConverters::class)
 data class CurrentWeatherEntry(
         val feelslike: Double,
         @SerializedName("is_day")
@@ -17,15 +18,13 @@ data class CurrentWeatherEntry(
         val precip: Double,
         val temperature: Double,
         //Embedded = Field ı açıklama yapmak için kullanılır.
-        @Embedded(prefix = "condition_")
-        val condition: Condition,
         val visibility: Double,
-//        @SerializedName("weather_code")
-//        val weatherCode: Int,
-//        @SerializedName("weather_descriptions")
-//        val weatherDescriptions: List<String>,
-//        @SerializedName("weather_icons")
-//        val weatherIcons: List<String>,
+        @SerializedName("weather_code")
+        val weatherCode: Double,
+        @SerializedName("weather_descriptions")
+        val weatherDescriptions: List<String>,
+        @SerializedName("weather_icons")
+        val weatherIcons: List<String>,
         @SerializedName("wind_dir")
         val windDir: String,
         @SerializedName("wind_speed")

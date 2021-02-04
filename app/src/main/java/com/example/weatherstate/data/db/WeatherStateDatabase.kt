@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.weatherstate.data.db.converter.CurrentWeatherEntryConverters
 import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
 
 
@@ -14,13 +16,14 @@ import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
 // Veritabanına ana erişim noktasıdır. @Database annotation’ı ile kullanılır.
 @Database(
         entities = [CurrentWeatherEntry::class],
-        version = 1,
+        version = 1
 
 )
 //Database sınıfımız abstract olmalı ve RoomDatabase‘den türetilmelidir.
 //Database ile alakalı tüm entity sınıfları burada belirtilmelidir.
 //@Dao sınıflarımız abstract fun olarak Database içinde oluşturulmalı.
 //Runtime’da, Room.databaseBuilder() ya da Room.inMemoryDatabaseBuilder() çağırarak da Database oluşturabiliriz
+@TypeConverters(CurrentWeatherEntryConverters::class)
 abstract class WeatherStateDatabase: RoomDatabase() {
 
     abstract fun getCurrentWeatherDao(): CurrentWeatherDao
@@ -36,7 +39,7 @@ abstract class WeatherStateDatabase: RoomDatabase() {
                 Room.databaseBuilder(
                         context.applicationContext,
                         WeatherStateDatabase::class.java,
-                        "team.db"
+                        "weatherstate.db"
                 ).build()
 
     }

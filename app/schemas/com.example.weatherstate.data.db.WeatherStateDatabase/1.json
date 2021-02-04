@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "484a512e099cb542fecbc6204f641352",
+    "identityHash": "8fcd0dd1a63ee2a8a55722ca9e9bc5e3",
     "entities": [
       {
         "tableName": "current_weather",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`dbId` INTEGER NOT NULL, `feelslike` REAL NOT NULL, `isDay` TEXT NOT NULL, `precip` REAL NOT NULL, `temperature` REAL NOT NULL, `visibility` REAL NOT NULL, `windDir` TEXT NOT NULL, `windSpeed` REAL NOT NULL, `condition_Text` TEXT NOT NULL, `condition_Icon` TEXT NOT NULL, `condition_Code` TEXT NOT NULL, PRIMARY KEY(`dbId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`dbId` INTEGER NOT NULL, `feelslike` REAL NOT NULL, `isDay` TEXT NOT NULL, `precip` REAL NOT NULL, `temperature` REAL NOT NULL, `visibility` REAL NOT NULL, `weatherCode` REAL NOT NULL, `weatherDescriptions` TEXT NOT NULL, `weatherIcons` TEXT NOT NULL, `windDir` TEXT NOT NULL, `windSpeed` REAL NOT NULL, PRIMARY KEY(`dbId`))",
         "fields": [
           {
             "fieldPath": "dbId",
@@ -45,6 +45,24 @@
             "notNull": true
           },
           {
+            "fieldPath": "weatherCode",
+            "columnName": "weatherCode",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weatherDescriptions",
+            "columnName": "weatherDescriptions",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weatherIcons",
+            "columnName": "weatherIcons",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
             "fieldPath": "windDir",
             "columnName": "windDir",
             "affinity": "TEXT",
@@ -54,24 +72,6 @@
             "fieldPath": "windSpeed",
             "columnName": "windSpeed",
             "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "condition.Text",
-            "columnName": "condition_Text",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "condition.Icon",
-            "columnName": "condition_Icon",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "condition.Code",
-            "columnName": "condition_Code",
-            "affinity": "TEXT",
             "notNull": true
           }
         ],
@@ -88,7 +88,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '484a512e099cb542fecbc6204f641352')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8fcd0dd1a63ee2a8a55722ca9e9bc5e3')"
     ]
   }
 }
