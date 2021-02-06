@@ -12,11 +12,13 @@ import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 import java.util.*
 
+//Bu kısımda oluşturuduğumuz WeaatherStateRepository interface indeki tanımlaıdğımız özzellikleri implemente ettim ve dışarıdan almak istediğim veri tanımladık.
 class WeatherStateRepositoryImpl(
     private val currentWeatherDao: CurrentWeatherDao,
     private val weatherNetworkDataSource: WeatherNetworkDataSource
 ) : WeatherStateRepository {
 
+    // Burada ise persistFetchedCurrentWeather fonk. na yeni hava durumu verilerini atadık.
     init {
         weatherNetworkDataSource.downloadedCurrentWeather.observeForever { newCurrentWeather ->
             persistFetchedCurrentWeather(newCurrentWeather)
@@ -24,6 +26,7 @@ class WeatherStateRepositoryImpl(
         }
     }
 
+    // implemente ettiğimiz özellik olan getCurrentWeather ı uı da gösterebilmek için currentWeatherDao da oluşturduğumuz getWeatherMetric() fonksiyonunu  tanımladık ki oradaki istenilen verileri uı ui da gösteerelim
     override suspend fun getCurrentWeather(metric: Boolean): LiveData<out UnitSpecificCurrentWeatherEntry> {
       initialWeatherData()
        return withContext(Dispatchers.IO){
@@ -32,6 +35,7 @@ class WeatherStateRepositoryImpl(
        }
     }
 
+    // Burada ise kalıcı bir şekilde mevcut hava durumunu için currentWeatherDao da oluşturduğumuz upsert fonksiyonunu tanımladık ki yeni güncel hava durumunu init {} işleminden alıp bu oluşturduğumuz fonksiyona atadık. ve bu hava durumunu ise upsert fonk ile database e ekledik veya güncelledik.
     private fun persistFetchedCurrentWeather(fetchedWeather: CurrentWeatherResponse){
         GlobalScope.launch(Dispatchers.IO){
 
@@ -40,10 +44,17 @@ class WeatherStateRepositoryImpl(
         }
     }
 
+    // İlk HavaDurumu Verilerini  zamana göre  her saatte bir güncelledik..
     private suspend fun initialWeatherData(){
             if (isFetchCurrentNeeded(ZonedDateTime.now().minusHours(1)))
                 fetchCurrentWeather()
 
+    }
+
+    //Gerekli hava durumu güncellemeleri getirmek için bir zaman aralığına koyduk.
+    private fun isFetchCurrentNeeded(lastFetchTime: ZonedDateTime): Boolean {
+        val thirtyMinutesAgo = ZonedDateTime.now().minusMinutes(30)
+        return lastFetchTime.isBefore(thirtyMinutesAgo)
     }
 
     //Güncel hava durumu bilgilerini getirmek için location ve language tanımladık.
@@ -51,12 +62,6 @@ class WeatherStateRepositoryImpl(
         weatherNetworkDataSource.fetchCurrentWeather("London",
                 Locale.getDefault().language
         )
-    }
-
-    //Gerekli hava durumu güncellemeleri getirmek için bir zaman aralığına koyduk.
-    private fun isFetchCurrentNeeded(lastFetchTime: ZonedDateTime): Boolean {
-        val thirtyMinutesAgo = ZonedDateTime.now().minusMinutes(30)
-        return lastFetchTime.isBefore(thirtyMinutesAgo)
     }
 
 }
