@@ -26,15 +26,6 @@ class WeatherStateRepositoryImpl(
         }
     }
 
-    // implemente ettiğimiz özellik olan getCurrentWeather ı uı da gösterebilmek için currentWeatherDao da oluşturduğumuz getWeatherMetric() fonksiyonunu  tanımladık ki oradaki istenilen verileri uı ui da gösteerelim
-    override suspend fun getCurrentWeather(metric: Boolean): LiveData<out UnitSpecificCurrentWeatherEntry> {
-      initialWeatherData()
-       return withContext(Dispatchers.IO){
-           return@withContext currentWeatherDao.getWeatherMetric()
-
-       }
-    }
-
     // Burada ise kalıcı bir şekilde mevcut hava durumunu için currentWeatherDao da oluşturduğumuz upsert fonksiyonunu tanımladık ki yeni güncel hava durumunu init {} işleminden alıp bu oluşturduğumuz fonksiyona atadık. ve bu hava durumunu ise upsert fonk ile database e ekledik veya güncelledik.
     private fun persistFetchedCurrentWeather(fetchedWeather: CurrentWeatherResponse){
         GlobalScope.launch(Dispatchers.IO){
@@ -43,6 +34,18 @@ class WeatherStateRepositoryImpl(
 
         }
     }
+
+
+    // implemente ettiğimiz özellik olan getCurrentWeather ı uı da gösterebilmek için currentWeatherDao da oluşturduğumuz getWeatherMetric() fonksiyonunu  tanımladık ki oradaki istenilen verileri uı ui da gösteerelim
+    override suspend fun getCurrentWeather(metric: Boolean): LiveData<out UnitSpecificCurrentWeatherEntry> {
+      initialWeatherData()
+       return withContext(Dispatchers.IO){
+           return@withContext if (metric) currentWeatherDao.getWeatherMetric()
+           else currentWeatherDao.getWeatherImperial()
+
+       }
+    }
+
 
     // İlk HavaDurumu Verilerini  zamana göre  her saatte bir güncelledik..
     private suspend fun initialWeatherData(){
@@ -59,7 +62,7 @@ class WeatherStateRepositoryImpl(
 
     //Güncel hava durumu bilgilerini getirmek için location ve language tanımladık.
     private suspend fun fetchCurrentWeather(){
-        weatherNetworkDataSource.fetchCurrentWeather("London",
+        weatherNetworkDataSource.fetchCurrentWeather("Osmaniye",
                 Locale.getDefault().language
         )
     }

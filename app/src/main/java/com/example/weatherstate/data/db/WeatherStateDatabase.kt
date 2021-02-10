@@ -16,14 +16,13 @@ import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
 // Veritabanına ana erişim noktasıdır. @Database annotation’ı ile kullanılır.
 @Database(
         entities = [CurrentWeatherEntry::class],
-        version = 1
+        version = 2
 
 )
 //Database sınıfımız abstract olmalı ve RoomDatabase‘den türetilmelidir.
 //Database ile alakalı tüm entity sınıfları burada belirtilmelidir.
 //@Dao sınıflarımız abstract fun olarak Database içinde oluşturulmalı.
 //Runtime’da, Room.databaseBuilder() ya da Room.inMemoryDatabaseBuilder() çağırarak da Database oluşturabiliriz
-@TypeConverters(CurrentWeatherEntryConverters::class)
 abstract class WeatherStateDatabase: RoomDatabase() {
 
     abstract fun getCurrentWeatherDao(): CurrentWeatherDao

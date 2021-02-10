@@ -5,22 +5,22 @@ import androidx.room.TypeConverters
 import com.example.weatherstate.data.db.converter.CurrentWeatherEntryConverters
 
 //@TypeConverters(CurrentWeatherEntryConverters::class)
-class MetricCurrentWeatherEntry(
-        @ColumnInfo(name ="temperature")
+data class MetricCurrentWeatherEntry(
+        @ColumnInfo(name ="tempC")
         override val temperature: Double,
-        @ColumnInfo(name ="windSpeed")
+        @ColumnInfo(name ="windKph")
         override val windSpeed: Double,
         @ColumnInfo(name ="windDir")
         override val windDirection: String,
-        @ColumnInfo(name ="precip")
+        @ColumnInfo(name ="precipMm")
         override val precipitationVolume: Double,
-        @ColumnInfo(name ="feelslike")
+        @ColumnInfo(name ="feelslikeC")
         override val feelsLikeTemperature: Double,
-        @ColumnInfo(name ="visibility")
+        @ColumnInfo(name ="visKm")
         override val visibilityDistance: Double,
-        @ColumnInfo(name ="weatherDescriptions")
-        override val weatherDescription: List<String>,
-        @ColumnInfo(name ="weatherIcons")
-        override val weatherIcon: List<String>
+        @ColumnInfo(name ="condition_text")
+        override val conditionText: String,
+        @ColumnInfo(name ="condition_cIcon")
+        override val conditionIconUrl: String
 
-) : UnitSpecificCurrentWeatherEntry
+        ) : UnitSpecificCurrentWeatherEntry

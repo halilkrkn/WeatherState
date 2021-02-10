@@ -56,7 +56,7 @@
     />
 
     <TextView
-        android:id="@+id/textView_weather"
+        android:id="@+id/textView_weather_conditionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
@@ -69,9 +69,9 @@
         tools:text="Patchy rain possible" />
 
     <ImageView
-        android:id="@+id/imageView_weather_icon"
-        android:layout_width="112dp"
-        android:layout_height="101dp"
+        android:id="@+id/imageView_conditionIcon"
+        android:layout_width="129dp"
+        android:layout_height="112dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="428dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -90,12 +90,12 @@
         android:layout_height="71dp"
         android:layout_marginStart="32dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView_weather_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_conditionIcon"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.192"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView_weather_icon"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.737"
         tools:text="25.0°C" />
 
     <TextView
@@ -109,16 +109,16 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView_temperature"
-        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_temperature"
-        app:layout_constraintVertical_bias="0.018"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="  Feels Like 20.4°C" />
 
     <TextView
         android:id="@+id/textView_wind"
-        android:layout_width="146dp"
-        android:layout_height="24dp"
+        android:layout_width="172dp"
+        android:layout_height="33dp"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,9 +130,23 @@
         tools:text=" Wind: SE, 5.3 m/s" />
 
     <TextView
+        android:id="@+id/textView_precipitation"
+        android:layout_width="172dp"
+        android:layout_height="33dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.559"
+        tools:text=" Precipitation: 5 mm" />
+
+    <TextView
         android:id="@+id/textView_visibility"
-        android:layout_width="146dp"
-        android:layout_height="24dp"
+        android:layout_width="172dp"
+        android:layout_height="33dp"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -142,20 +156,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.625"
         tools:text=" Visibility: 20 km" />
-
-    <TextView
-        android:id="@+id/textView_precipitation"
-        android:layout_width="146dp"
-        android:layout_height="24dp"
-        android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559"
-        tools:text=" Precipitation: 5mm" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

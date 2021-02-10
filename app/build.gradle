@@ -52,7 +52,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildToolsVersion '29.0.2'
+
 }
 
 dependencies {
@@ -85,7 +85,8 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
+//    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
+//    kapt "android.arch.persistence.room:compiler:$room_version"
 
 
 
@@ -100,6 +101,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0'
 
     //Kodein
    // implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"

@@ -11,16 +11,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-// http://api.weatherstack.com/current?access_key=651ccaea42ebedb6d9caa37582355229&query=Ankara&Lang=tr
-const val API_KEY = "651ccaea42ebedb6d9caa37582355229"
-const val BASE_URL ="http://api.weatherstack.com/"
+//https://api.weatherapi.com/v1/current.json?key=0a8c767d8a91484290d132732210702&q=Osmaniye&Lang=tr
+//https://api.weatherapi.com/v1/current.json?key=cc776121ebf647d98e3132735210702&q=Osmaniye
+const val API_KEY = "cc776121ebf647d98e3132735210702"
+//const val BASE_URL ="https://api.weatherapi.com/v1/"
 
 
 // Bu oluşturduğumuz interface ile bir sevis olluşturduk ve api üzerindeki verileri sağlıklı ve düzenli bir şekilde çekmemize yarıyacak kodları yazdık.
 
 interface WeatherStackApiService {
 
-    @GET("current")
+    @GET("current.json")
     fun getCurrentWeather (
         @Query("query") location: String,
         @Query("lang")  languageCode: String ="tr"
@@ -39,7 +40,7 @@ interface WeatherStackApiService {
                 val url = chain.request()
                         .url()
                         .newBuilder()
-                        .addQueryParameter("access_key", API_KEY)
+                        .addQueryParameter("key", API_KEY)
                         .build()
                 val request = chain.request()
                         .newBuilder()
@@ -56,7 +57,7 @@ interface WeatherStackApiService {
 
             return Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl(BASE_URL)
+                    .baseUrl("https://api.weatherapi.com/v1/")
                     .addCallAdapterFactory(CoroutineCallAdapterFactory())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
