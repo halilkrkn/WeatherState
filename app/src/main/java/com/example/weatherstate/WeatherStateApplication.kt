@@ -7,6 +7,8 @@ import com.example.weatherstate.data.network.ConnectivityInterceptorImpl
 import com.example.weatherstate.data.network.WeatherNetworkDataSource
 import com.example.weatherstate.data.network.WeatherNetworkDataSourceImpl
 import com.example.weatherstate.data.network.service.WeatherStackApiService
+import com.example.weatherstate.data.provider.UnitProvider
+import com.example.weatherstate.data.provider.UnitProviderImpl
 import com.example.weatherstate.data.repository.WeatherStateRepository
 import com.example.weatherstate.data.repository.WeatherStateRepositoryImpl
 import com.example.weatherstate.ui.weather.current.CurrentWeatherViewModelFactory
@@ -32,7 +34,8 @@ class WeatherStateApplication : Application(),KodeinAware{
         bind() from singleton {WeatherStackApiService(instance())}
         bind<WeatherNetworkDataSource>() with singleton {WeatherNetworkDataSourceImpl(instance())}
         bind<WeatherStateRepository>() with singleton { WeatherStateRepositoryImpl(instance(),instance()) }
-        bind() from provider {CurrentWeatherViewModelFactory(instance())}
+        bind<UnitProvider>() with singleton {UnitProviderImpl(instance())}
+        bind() from provider {CurrentWeatherViewModelFactory(instance(),instance())}
     }
 
     override fun onCreate() {

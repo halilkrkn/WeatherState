@@ -33,13 +33,6 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     ): View? {
         return inflater.inflate(R.layout.current_weather_fragment, container, false)
     }
-/* TODO: Önceki kullanım şekli 1
-
-    companion object {
-//        fun newInstance() = CurrentWeatherFragment()
-    }
-
- */
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -47,26 +40,9 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         currentWeatherViewModel = ViewModelProviders.of(this, viewModelFactory).get(CurrentWeatherViewModel::class.java)
 
         bindUI()
-
-
-/*
-        // TODO: Önceki kullanım Şekli 2
-
-
-//        val apiService = WeatherStackApiService(ConnectivityInterceptorImpl(this.context!!))
-//        val weatherNetworkDataSource = WeatherNetworkDataSourceImpl(apiService)
-//
-//        weatherNetworkDataSource.downloadedCurrentWeather.observe(this, Observer {
-//            textCurrent.text = it.toString()
-//
-//        })
-//
-//        GlobalScope.launch(Dispatchers.Main){
-//            weatherNetworkDataSource.fetchCurrentWeather("Osmaniye","tr")
-//        }
-        */
     }
 
+    // Bu fonksiyonda api üzerindeki verileri database e ekleyip sonrada repository içerisinden istenilen verileri çektik ve UI da gösterdik.
     private fun bindUI() = launch {
 
 
@@ -96,11 +72,13 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         return if(currentWeatherViewModel.isMetric) metric else imperial
     }
 
+    //ActionBarda  tanımladığımız lokasyonu gösterdik.
     private fun updateLocation(location: String){
 
         (activity as? AppCompatActivity)?.supportActionBar?.title = location
     }
 
+    //ActionBarda  günü  gösterdik.
     private fun updateDatetoToday(){
 
         (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "Today"
@@ -121,10 +99,12 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         textView_precipitation.text = "Precipitation: $precipitationVolume $unitAbbreviation"
 
     }
+
     private fun updateWind(windDirection:String, windSpeed: Double){
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("kph","mph")
         textView_wind.text = "Wind: $windDirection $windSpeed $unitAbbreviation"
     }
+
     private fun updateVisibility(visibilityDistance: Double){
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("km","miles")
         textView_visibility.text = "Visibility: $visibilityDistance $unitAbbreviation"
