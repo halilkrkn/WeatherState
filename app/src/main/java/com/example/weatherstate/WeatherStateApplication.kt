@@ -7,6 +7,8 @@ import com.example.weatherstate.data.network.ConnectivityInterceptorImpl
 import com.example.weatherstate.data.network.WeatherNetworkDataSource
 import com.example.weatherstate.data.network.WeatherNetworkDataSourceImpl
 import com.example.weatherstate.data.network.service.WeatherStackApiService
+import com.example.weatherstate.data.provider.LocationProvider
+import com.example.weatherstate.data.provider.LocationProviderImpl
 import com.example.weatherstate.data.provider.UnitProvider
 import com.example.weatherstate.data.provider.UnitProviderImpl
 import com.example.weatherstate.data.repository.WeatherStateRepository
@@ -30,10 +32,12 @@ class WeatherStateApplication : Application(),KodeinAware{
         //Bağımlılıkları bağlama işlemleri yapılıyor
         bind() from singleton { WeatherStateDatabase(instance()) }
         bind() from singleton { instance<WeatherStateDatabase>().getCurrentWeatherDao() }
+        bind() from singleton { instance<WeatherStateDatabase>().getWeatherLocationDao()}
         bind<ConnectivityInterceptor>() with singleton {ConnectivityInterceptorImpl(instance())}
         bind() from singleton {WeatherStackApiService(instance())}
         bind<WeatherNetworkDataSource>() with singleton {WeatherNetworkDataSourceImpl(instance())}
-        bind<WeatherStateRepository>() with singleton { WeatherStateRepositoryImpl(instance(),instance()) }
+        bind<WeatherStateRepository>() with singleton { WeatherStateRepositoryImpl(instance(),instance(),instance(),instance()) }
+        bind<LocationProvider>() with singleton {LocationProviderImpl()}
         bind<UnitProvider>() with singleton {UnitProviderImpl(instance())}
         bind() from provider {CurrentWeatherViewModelFactory(instance(),instance())}
     }

@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.example.weatherstate.data.db.converter.CurrentWeatherEntryConverters
+import com.example.weatherstate.data.db.dao.CurrentWeatherDao
+import com.example.weatherstate.data.db.dao.WeatherLocationDao
 import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
-
+import com.example.weatherstate.data.db.entity.WeatherLocation
 
 
 // Room’un beyin kısmıdır.
@@ -15,7 +15,7 @@ import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
 // Veritabanını yönetir
 // Veritabanına ana erişim noktasıdır. @Database annotation’ı ile kullanılır.
 @Database(
-        entities = [CurrentWeatherEntry::class],
+        entities = [CurrentWeatherEntry::class,WeatherLocation::class],
         version = 2
 
 )
@@ -26,6 +26,7 @@ import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
 abstract class WeatherStateDatabase: RoomDatabase() {
 
     abstract fun getCurrentWeatherDao(): CurrentWeatherDao
+    abstract fun getWeatherLocationDao(): WeatherLocationDao
 
     companion object{
         @Volatile private var instance: WeatherStateDatabase ?= null

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "f871b0c4d0a87f6561acdd218c30de64",
+    "identityHash": "251151e326c2c44150906e3ecd24bbc5",
     "entities": [
       {
         "tableName": "current_weather",
@@ -113,12 +113,74 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "weather_location",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`locationId` INTEGER NOT NULL, `country` TEXT NOT NULL, `lat` REAL NOT NULL, `localtimeEpoch` INTEGER NOT NULL, `lon` REAL NOT NULL, `name` TEXT NOT NULL, `region` TEXT NOT NULL, `tzId` TEXT NOT NULL, PRIMARY KEY(`locationId`))",
+        "fields": [
+          {
+            "fieldPath": "locationId",
+            "columnName": "locationId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "localtimeEpoch",
+            "columnName": "localtimeEpoch",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lon",
+            "columnName": "lon",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "region",
+            "columnName": "region",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tzId",
+            "columnName": "tzId",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "locationId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f871b0c4d0a87f6561acdd218c30de64')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '251151e326c2c44150906e3ecd24bbc5')"
     ]
   }
 }

@@ -23,9 +23,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     // Burada da WeatherStateApplication da bind(bağladığımız) CurrentWeatherViewModelFactory i tanımladık.
     private val viewModelFactory: CurrentWeatherViewModelFactory by instance()
 
-
     private lateinit var currentWeatherViewModel: CurrentWeatherViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,13 +43,19 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     // Bu fonksiyonda api üzerindeki verileri database e ekleyip sonrada repository içerisinden istenilen verileri çektik ve UI da gösterdik.
     private fun bindUI() = launch {
 
-
         val currentWeather = currentWeatherViewModel.weather.await()
+        val weatherLocation = currentWeatherViewModel.weatherLocation.await()
+
+        weatherLocation.observe(this@CurrentWeatherFragment, Observer { location ->
+            if (location == null ) return@Observer
+            updateLocation(location.name)
+        })
+
+
         currentWeather.observe(this@CurrentWeatherFragment, Observer {
             if (it == null) return@Observer
 
             group_loading.visibility = View.GONE
-            updateLocation("Osmaniye")
             updateDatetoToday()
             updateTemperatures(it.temperature, it.feelsLikeTemperature)
             updateConditionText(it.conditionText)
