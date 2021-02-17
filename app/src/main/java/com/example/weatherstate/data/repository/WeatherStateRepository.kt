@@ -8,5 +8,6 @@ import com.example.weatherstate.data.db.unitlocalized.UnitSpecificCurrentWeather
 // UI da gösterebilmek için böyle bir fonk. oluşturduk interfface in içerisinde.
 interface WeatherStateRepository {
     suspend fun getCurrentWeather(metric: Boolean): LiveData<out UnitSpecificCurrentWeatherEntry>
+    // güncel hava durumu lokasyonları
     suspend fun getWeatherLocation(): LiveData<WeatherLocation>
 }

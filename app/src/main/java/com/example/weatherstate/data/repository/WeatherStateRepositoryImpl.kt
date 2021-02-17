@@ -82,7 +82,7 @@ class WeatherStateRepositoryImpl(
 
     //Güncel hava durumu bilgilerini getirmek için location ve language tanımladık.
     private suspend fun fetchCurrentWeather(){
-        weatherNetworkDataSource.fetchCurrentWeather(locationProvider.getPrefferedLoacationString(),
+        weatherNetworkDataSource.fetchCurrentWeather(locationProvider.getPreferredLocationString(),
                 Locale.getDefault().language
         )
     }

@@ -18,7 +18,7 @@ import org.kodein.di.generic.instance
 
 class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
-    // Kodein ile oluşturduğumuz bağımlılıkları çağırmak için KodeinAware interface ini çağrıp closestKodeini override edip bağımlılıkları çalıştırdık.
+    // Kodein ile oluşturduğumuz bağımlılıkları çağırmak için KodeinAware interface ini çağrıp closestKodein i override edip bağımlılıkları çalıştırdık.
     override val kodein by closestKodein()
     // Burada da WeatherStateApplication da bind(bağladığımız) CurrentWeatherViewModelFactory i tanımladık.
     private val viewModelFactory: CurrentWeatherViewModelFactory by instance()

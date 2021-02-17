@@ -1,6 +1,7 @@
 package com.example.weatherstate
 
 import android.app.Application
+import android.content.Context
 import com.example.weatherstate.data.db.WeatherStateDatabase
 import com.example.weatherstate.data.network.ConnectivityInterceptor
 import com.example.weatherstate.data.network.ConnectivityInterceptorImpl
@@ -14,6 +15,7 @@ import com.example.weatherstate.data.provider.UnitProviderImpl
 import com.example.weatherstate.data.repository.WeatherStateRepository
 import com.example.weatherstate.data.repository.WeatherStateRepositoryImpl
 import com.example.weatherstate.ui.weather.current.CurrentWeatherViewModelFactory
+import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -37,7 +39,8 @@ class WeatherStateApplication : Application(),KodeinAware{
         bind() from singleton {WeatherStackApiService(instance())}
         bind<WeatherNetworkDataSource>() with singleton {WeatherNetworkDataSourceImpl(instance())}
         bind<WeatherStateRepository>() with singleton { WeatherStateRepositoryImpl(instance(),instance(),instance(),instance()) }
-        bind<LocationProvider>() with singleton {LocationProviderImpl()}
+        bind() from provider { LocationServices.getFusedLocationProviderClient(instance<Context>()) }
+        bind<LocationProvider>() with singleton {LocationProviderImpl(instance(), instance())}
         bind<UnitProvider>() with singleton {UnitProviderImpl(instance())}
         bind() from provider {CurrentWeatherViewModelFactory(instance(),instance())}
     }
