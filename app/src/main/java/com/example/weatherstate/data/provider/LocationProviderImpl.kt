@@ -23,6 +23,8 @@ class LocationProviderImpl(
 
     private val appContext = context.applicationContext
 
+
+    // TODO: ******** getPreferredLocationString() fonksiyonu LocationProvider dan  implement ettik*********
     override suspend fun getPreferredLocationString(): String {
         if (isUsingDeviceLocation()){
             try {
@@ -38,6 +40,7 @@ class LocationProviderImpl(
         }
     }
 
+    // TODO: ******** hasLocationChanged fonksiyonu LocationProvider dan  implement ettik*********
     override suspend fun hasLocationChanged(lastWeatherLocation: WeatherLocation): Boolean {
         val deviceLocationChanged = try {
             hasDeviceLocationChanged(lastWeatherLocation)

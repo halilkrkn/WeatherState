@@ -7,8 +7,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.weatherstate.data.db.entity.CURRENT_WEATHER_ID
 import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
-import com.example.weatherstate.data.db.unitlocalized.ImperialCurrentWeatherEntry
-import com.example.weatherstate.data.db.unitlocalized.MetricCurrentWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.current.ImperialCurrentWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.current.MetricCurrentWeatherEntry
 
 //DAO, veritabanına erişen yöntemlerin tanımlanmasından sorumludur.
 //SQL sorgularımızı koyduğumuz bir Interface‘dir.

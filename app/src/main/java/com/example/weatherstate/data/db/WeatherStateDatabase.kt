@@ -4,7 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.weatherstate.data.db.converters.LocalDateConverter
 import com.example.weatherstate.data.db.dao.CurrentWeatherDao
+import com.example.weatherstate.data.db.dao.FutureWeatherDao
 import com.example.weatherstate.data.db.dao.WeatherLocationDao
 import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
 import com.example.weatherstate.data.db.entity.WeatherLocation
@@ -23,9 +26,11 @@ import com.example.weatherstate.data.db.entity.WeatherLocation
 //Database ile alakalı tüm entity sınıfları burada belirtilmelidir.
 //@Dao sınıflarımız abstract fun olarak Database içinde oluşturulmalı.
 //Runtime’da, Room.databaseBuilder() ya da Room.inMemoryDatabaseBuilder() çağırarak da Database oluşturabiliriz
+@TypeConverters(LocalDateConverter::class)
 abstract class WeatherStateDatabase: RoomDatabase() {
 
     abstract fun getCurrentWeatherDao(): CurrentWeatherDao
+    abstract fun getFutureWeatherDao(): FutureWeatherDao
     abstract fun getWeatherLocationDao(): WeatherLocationDao
 
     companion object{

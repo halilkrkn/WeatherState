@@ -2,6 +2,7 @@ package com.example.weatherstate.data.network.service
 
 import com.example.weatherstate.data.network.ConnectivityInterceptor
 import com.example.weatherstate.data.network.response.CurrentWeatherResponse
+import com.example.weatherstate.data.network.response.FutureWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -11,22 +12,32 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-//https://api.weatherapi.com/v1/current.json?key=0a8c767d8a91484290d132732210702&q=Osmaniye&Lang=tr
-//https://api.weatherapi.com/v1/current.json?key=cc776121ebf647d98e3132735210702&q=Osmaniye
+
+
 const val API_KEY = "cc776121ebf647d98e3132735210702"
-//const val BASE_URL ="https://api.weatherapi.com/v1/"
+const val BASE_URL ="https://api.weatherapi.com/v1/"
 
 
 // Bu oluşturduğumuz interface ile bir sevis olluşturduk ve api üzerindeki verileri sağlıklı ve düzenli bir şekilde çekmemize yarıyacak kodları yazdık.
-
 interface WeatherStackApiService {
 
+    // CurrentWeather
+    //https://api.weatherapi.com/v1/current.json?key=cc776121ebf647d98e3132735210702&q=Osmaniye&lang=tr
     @GET("current.json")
     fun getCurrentWeather (
-        @Query("query") location: String,
+        @Query("q") location: String,
         @Query("lang")  languageCode: String ="tr"
     ): Deferred<CurrentWeatherResponse>
 
+
+    // FutureWeather
+    //https://api.weatherapi.com/v1/forecast.json?key=cc776121ebf647d98e3132735210702&q=osmaniye&days=1
+    @GET("forecast.json")
+    fun getFutureWeather (
+            @Query("q") location: String,
+            @Query("days") days: Int,
+            @Query("lang")  languageCode: String ="tr"
+    ): Deferred<FutureWeatherResponse>
 
     companion object{
 
@@ -57,7 +68,7 @@ interface WeatherStackApiService {
 
             return Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl("https://api.weatherapi.com/v1/")
+                    .baseUrl(BASE_URL)
                     .addCallAdapterFactory(CoroutineCallAdapterFactory())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()

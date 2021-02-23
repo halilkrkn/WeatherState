@@ -1,4 +1,4 @@
-package com.example.weatherstate.data.db.unitlocalized
+package com.example.weatherstate.data.db.unitlocalized.current
 
 import androidx.room.ColumnInfo
 
@@ -19,4 +19,4 @@ data class ImperialCurrentWeatherEntry(
     override val feelsLikeTemperature: Double,
     @ColumnInfo(name ="visMiles")
     override val visibilityDistance: Double
-):UnitSpecificCurrentWeatherEntry
+): UnitSpecificCurrentWeatherEntry

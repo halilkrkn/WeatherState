@@ -1,9 +1,6 @@
-package com.example.weatherstate.data.db.unitlocalized
+package com.example.weatherstate.data.db.unitlocalized.current
 
-import androidx.room.TypeConverters
-import com.example.weatherstate.data.db.converter.CurrentWeatherEntryConverters
 
-//@TypeConverters(CurrentWeatherEntryConverters::class)
 interface UnitSpecificCurrentWeatherEntry {
 
     val temperature: Double

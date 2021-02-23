@@ -1,10 +1,7 @@
-package com.example.weatherstate.data.db.unitlocalized
+package com.example.weatherstate.data.db.unitlocalized.current
 
 import androidx.room.ColumnInfo
-import androidx.room.TypeConverters
-import com.example.weatherstate.data.db.converter.CurrentWeatherEntryConverters
 
-//@TypeConverters(CurrentWeatherEntryConverters::class)
 data class MetricCurrentWeatherEntry(
         @ColumnInfo(name ="tempC")
         override val temperature: Double,

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.weatherstate.data.db.dao.CurrentWeatherDao
 import com.example.weatherstate.data.db.dao.WeatherLocationDao
 import com.example.weatherstate.data.db.entity.WeatherLocation
-import com.example.weatherstate.data.db.unitlocalized.UnitSpecificCurrentWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.current.UnitSpecificCurrentWeatherEntry
 import com.example.weatherstate.data.network.WeatherNetworkDataSource
 import com.example.weatherstate.data.network.response.CurrentWeatherResponse
 import com.example.weatherstate.data.provider.LocationProvider
