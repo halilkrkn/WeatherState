@@ -73,7 +73,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun chooseLocalizedUnitAbbreviation(metric: String, imperial: String): String{
-        return if(currentWeatherViewModel.isMetric) metric else imperial
+        return if(currentWeatherViewModel.isMetricUnit) metric else imperial
     }
 
     //ActionBarda  tanımladığımız lokasyonu gösterdik.

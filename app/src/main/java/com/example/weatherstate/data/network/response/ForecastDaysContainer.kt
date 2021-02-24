@@ -7,5 +7,5 @@ import com.google.gson.annotations.SerializedName
 data class ForecastDaysContainer(
 
         @SerializedName("forecastday")
-        val forecastDayEntries: List<FutureWeatherEntry>
+        val entries: List<FutureWeatherEntry>
 )

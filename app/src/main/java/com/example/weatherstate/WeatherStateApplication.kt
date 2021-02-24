@@ -14,6 +14,7 @@ import com.example.weatherstate.data.provider.UnitProvider
 import com.example.weatherstate.data.provider.UnitProviderImpl
 import com.example.weatherstate.data.repository.WeatherStateRepository
 import com.example.weatherstate.data.repository.WeatherStateRepositoryImpl
+import com.example.weatherstate.ui.weather.Future.list.FutureListWeatherViewModelFactory
 import com.example.weatherstate.ui.weather.current.CurrentWeatherViewModelFactory
 import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -34,15 +35,17 @@ class WeatherStateApplication : Application(),KodeinAware{
         //Bağımlılıkları bağlama işlemleri yapılıyor
         bind() from singleton { WeatherStateDatabase(instance()) }
         bind() from singleton { instance<WeatherStateDatabase>().getCurrentWeatherDao() }
+        bind() from singleton { instance<WeatherStateDatabase>().getFutureWeatherDao() }
         bind() from singleton { instance<WeatherStateDatabase>().getWeatherLocationDao()}
         bind<ConnectivityInterceptor>() with singleton {ConnectivityInterceptorImpl(instance())}
         bind() from singleton {WeatherStackApiService(instance())}
         bind<WeatherNetworkDataSource>() with singleton {WeatherNetworkDataSourceImpl(instance())}
-        bind<WeatherStateRepository>() with singleton { WeatherStateRepositoryImpl(instance(),instance(),instance(),instance()) }
+        bind<WeatherStateRepository>() with singleton { WeatherStateRepositoryImpl(instance(),instance(),instance(),instance(),instance()) }
         bind() from provider { LocationServices.getFusedLocationProviderClient(instance<Context>()) }
         bind<LocationProvider>() with singleton {LocationProviderImpl(instance(), instance())}
         bind<UnitProvider>() with singleton {UnitProviderImpl(instance())}
         bind() from provider {CurrentWeatherViewModelFactory(instance(),instance())}
+        bind() from provider {FutureListWeatherViewModelFactory(instance(),instance()) }
     }
 
     override fun onCreate() {

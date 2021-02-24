@@ -10,6 +10,7 @@ import com.example.weatherstate.data.db.dao.CurrentWeatherDao
 import com.example.weatherstate.data.db.dao.FutureWeatherDao
 import com.example.weatherstate.data.db.dao.WeatherLocationDao
 import com.example.weatherstate.data.db.entity.CurrentWeatherEntry
+import com.example.weatherstate.data.db.entity.FutureWeatherEntry
 import com.example.weatherstate.data.db.entity.WeatherLocation
 
 
@@ -18,7 +19,7 @@ import com.example.weatherstate.data.db.entity.WeatherLocation
 // Veritabanını yönetir
 // Veritabanına ana erişim noktasıdır. @Database annotation’ı ile kullanılır.
 @Database(
-        entities = [CurrentWeatherEntry::class,WeatherLocation::class],
+        entities = [CurrentWeatherEntry::class,WeatherLocation::class,FutureWeatherEntry::class],
         version = 2
 
 )

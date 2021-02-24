@@ -10,7 +10,8 @@ object LocalDateConverter {
     fun stringToDate(str: String?) = str?.let{
         LocalDate.parse(it, DateTimeFormatter.ISO_LOCAL_DATE)
     }
-
+    @TypeConverter
+    @JvmStatic
     fun dateToString(dateTime: LocalDate?) =  dateTime?.format(DateTimeFormatter.ISO_LOCAL_DATE)
 
 }

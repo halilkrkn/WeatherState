@@ -1,30 +1,21 @@
 package com.example.weatherstate.ui.weather.current
 
-import androidx.lifecycle.ViewModel
+
 import com.example.weatherstate.data.provider.UnitProvider
 import com.example.weatherstate.data.repository.WeatherStateRepository
-import com.example.weatherstate.internal.UnitSystem
 import com.example.weatherstate.internal.lazyDeferred
+import com.example.weatherstate.ui.base.WeatherViewModel
+
 
 class CurrentWeatherViewModel(
         private val weatherStateRepository: WeatherStateRepository,
-        unitProvider: UnitProvider
-) : ViewModel() {
+        private val unitProvider: UnitProvider
+) : WeatherViewModel(weatherStateRepository,unitProvider) {
 
-    private val unitSystem = unitProvider.getUnitSystem() //get from settings later - ayarlardan daha sonra alıcak
-
-    val isMetric: Boolean
-        get() = unitSystem == UnitSystem.METRIC
 
     // hata : Suspend function 'getCurrentWeather' should be called only from a coroutine or another suspend function
-    // Yukarıdaki hatayı düzeltmek için Delegates.kt de oluşturduğumuz lazyDeferreed fonksiyonu ile getCurrentWeather da oluşan suspend hatasını yok etmek için lazyDeferred funksiyonunu atamış olduk.
+    // Yukarıdaki hatayı düzeltmek için internal dosyası içerisindeki Delegates.kt de oluşturduğumuz lazyDeferreed fonksiyonu ile getCurrentWeather da oluşan suspend hatasını yok etmek için lazyDeferred funksiyonunu atamış olduk.
     val weather by lazyDeferred {
-        weatherStateRepository.getCurrentWeather(isMetric)
-    }
-
-    val weatherLocation by lazyDeferred {
-
-        weatherStateRepository.getWeatherLocation()
-
+        weatherStateRepository.getCurrentWeather(super.isMetricUnit)
     }
 }

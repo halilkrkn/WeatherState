@@ -13,15 +13,15 @@ interface FutureWeatherDao {
 
     // insert işlemlerinin yapıldığı bir fonksiyondur.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(futureWeatherEntries: FutureWeatherEntry)
+    fun insert(futureWeatherEntries: List<FutureWeatherEntry>)
 
     //Burada sql sorgusu yaparak oluşturuduğumuz Entity içerisindeki verilere erişerek MetricSimpleFutureWeatherEntry deki verilere uygun olanları alıp LiveData içerisine koyup sonrada ui da canlı bir şekilde gözükmesi için yapıyoruz.
     @Query("select * from future_weather where date(date) >= date(:startDate)" )
-    fun getSimpleFFutureWeatherMetric(startDate: LocalDate): LiveData<List<MetricSimpleFutureWeatherEntry>>
+    fun getSimpleFutureWeatherMetric(startDate: LocalDate): LiveData<List<MetricSimpleFutureWeatherEntry>>
 
     //Burada sql sorgusu yaparak oluşturuduğumuz Entity içerisindeki verilere erişerek ImperialSimpleFutureWeatherEntry deki verilere uygun olanları alıp LiveData içerisine koyup sonrada ui da canlı bir şekilde gözükmesi için yapıyoruz.
     @Query("select * from future_weather where date(date) >= date(:startDate)" )
-    fun getSimpleFFutureWeatherImperial(startDate: LocalDate): LiveData<List<ImperialSimpleFutureWeatherEntry>>
+    fun getSimpleFutureWeatherImperial(startDate: LocalDate): LiveData<List<ImperialSimpleFutureWeatherEntry>>
 
     // Buradaki sorgu günlere göre gelecek hava durumu bilgilerinin günlerini veri tabanından çekiyoruz. Bu şekilde gün gün gelecek hava durumu biliglerine erişimi sağlatmış oluyoruz.
     @Query("select * from future_weather where date(date) >= date(:startDate)")

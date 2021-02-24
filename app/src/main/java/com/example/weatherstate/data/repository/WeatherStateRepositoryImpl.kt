@@ -3,16 +3,21 @@ package com.example.weatherstate.data.repository
 
 import androidx.lifecycle.LiveData
 import com.example.weatherstate.data.db.dao.CurrentWeatherDao
+import com.example.weatherstate.data.db.dao.FutureWeatherDao
 import com.example.weatherstate.data.db.dao.WeatherLocationDao
 import com.example.weatherstate.data.db.entity.WeatherLocation
 import com.example.weatherstate.data.db.unitlocalized.current.UnitSpecificCurrentWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import com.example.weatherstate.data.network.FORECAST_DAYS_COUNT
 import com.example.weatherstate.data.network.WeatherNetworkDataSource
 import com.example.weatherstate.data.network.response.CurrentWeatherResponse
+import com.example.weatherstate.data.network.response.FutureWeatherResponse
 import com.example.weatherstate.data.provider.LocationProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.threeten.bp.LocalDate
 import org.threeten.bp.ZonedDateTime
 import java.util.*
 
@@ -21,6 +26,7 @@ import java.util.*
 class WeatherStateRepositoryImpl(
         private val currentWeatherDao: CurrentWeatherDao,
         private val weatherLocationDao: WeatherLocationDao,
+        private val futureWeatherDao: FutureWeatherDao,
         private val weatherNetworkDataSource: WeatherNetworkDataSource,
         private val locationProvider: LocationProvider
 ) : WeatherStateRepository {
@@ -45,13 +51,28 @@ class WeatherStateRepositoryImpl(
         }
     }
 
+    // TODO: ******** getFutureWeatherList fonksiyonu implementi*********
+    override suspend fun getFutureWeatherList(startDate: LocalDate, metric: Boolean): LiveData<out List<UnitSpecificSimpleFutureWeatherEntry>> {
+        return withContext(Dispatchers.IO){
+            initialWeatherData()
+            return@withContext if(metric) futureWeatherDao.getSimpleFutureWeatherMetric(startDate)
+            else futureWeatherDao.getSimpleFutureWeatherImperial(startDate)
+        }
+    }
+
 
     // Burada ise persistFetchedCurrentWeather fonk. na yeni hava durumu verilerini atadık.
     init {
-        weatherNetworkDataSource.downloadedCurrentWeather.observeForever { newCurrentWeather ->
-            persistFetchedCurrentWeather(newCurrentWeather)
+        weatherNetworkDataSource.apply {
+            downloadedCurrentWeather.observeForever { newCurrentWeather ->
+                persistFetchedCurrentWeather(newCurrentWeather)
+            }
+            downloadedFutureWeather.observeForever { newFutureWeather ->
+                persistFetchedFutureWeather(newFutureWeather)
 
+            }
         }
+
     }
 
     // Burada ise kalıcı bir şekilde mevcut hava durumunu için currentWeatherDao da oluşturduğumuz upsert fonksiyonunu tanımladık ki yeni güncel hava durumunu init {} işleminden alıp bu oluşturduğumuz fonksiyona atadık. ve bu hava durumunu ise upsert fonk ile database e ekledik veya güncelledik.
@@ -64,19 +85,36 @@ class WeatherStateRepositoryImpl(
     }
 
 
+    private fun persistFetchedFutureWeather(fetchedWeather: FutureWeatherResponse){
+       fun deleteOldForecastData(){
+           val today = LocalDate.now()
+           futureWeatherDao.deleteOldEntries(today)
+       }
+
+        GlobalScope.launch(Dispatchers.IO){
+            deleteOldForecastData()
+            val futureWeatherList = fetchedWeather.futureWeatherEntries.entries
+            futureWeatherDao.insert(futureWeatherList)
+            weatherLocationDao.upsert(fetchedWeather.location)
+        }
+    }
+
+
+
     // İlk HavaDurumu Verilerini  zamana göre  her saatte bir güncelledik..
     private suspend fun initialWeatherData(){
-        val lastWeatherLocation = weatherLocationDao.getLocation().value
+        val lastWeatherLocation = weatherLocationDao.getLocationNonLive()
 
         if(lastWeatherLocation == null || locationProvider.hasLocationChanged(lastWeatherLocation)){
             fetchCurrentWeather()
+            fetchFutureWeather()
             return
         }
 
         //burada WeatherLocation classında yapmış olduğumuz zonedDateTime ı çektik.
         if (isFetchCurrentNeeded(lastWeatherLocation.zonedDateTime))
             fetchCurrentWeather()
-
+            fetchFutureWeather()
     }
 
 
@@ -87,10 +125,24 @@ class WeatherStateRepositoryImpl(
         )
     }
 
-    //Gerekli hava durumu güncellemeleri getirmek için bir zaman aralığına koyduk.
+    //Gelecek hava durumu bilgilerini getirmek için location ve language tanımladık.
+    private suspend fun fetchFutureWeather(){
+        weatherNetworkDataSource.fetchFutureWeather(locationProvider.getPreferredLocationString(),
+                Locale.getDefault().language
+        )
+    }
+
+    //Gerekli güncel hava durumu güncellemeleri getirmek için bir zaman aralığına koyduk.
     private fun isFetchCurrentNeeded(lastFetchTime: ZonedDateTime): Boolean {
         val thirtyMinutesAgo = ZonedDateTime.now().minusMinutes(30)
         return lastFetchTime.isBefore(thirtyMinutesAgo)
+    }
+
+    //Gerekli gelecek hava durumu güncellemeleri getirmek için bir zaman aralığına koyduk.
+    private fun isFetchFutureNeeded(): Boolean {
+        val today = LocalDate.now()
+        val futureWeatherCount = futureWeatherDao.countFutureWeather(today)
+        return futureWeatherCount < FORECAST_DAYS_COUNT
     }
 
 
