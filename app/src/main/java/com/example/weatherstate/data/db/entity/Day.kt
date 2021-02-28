@@ -17,14 +17,6 @@ data class Day(
         val avgvisMiles: Double,
         @Embedded(prefix = "condition_",)
         val condition: Condition,
-        @SerializedName("daily_chance_of_rain")
-        val dailyChanceOfRain: String,
-            @SerializedName("daily_chance_of_snow")
-        val dailyChanceOfSnow: String,
-            @SerializedName("daily_will_it_rain")
-        val dailyWillİtRain: Int,
-            @SerializedName("daily_will_it_snow")
-        val dailyWillİtSnow: Int,
             @SerializedName("maxtemp_c")
         val maxtempC: Double,
             @SerializedName("maxtemp_f")
@@ -40,6 +32,6 @@ data class Day(
             @SerializedName("totalprecip_mm")
         val totalprecipMm: Double,
             @SerializedName("totalprecip_in")
-        val totalprecipİn: Double,
+        val totalprecipIn: Double,
         val uv: Double
 )

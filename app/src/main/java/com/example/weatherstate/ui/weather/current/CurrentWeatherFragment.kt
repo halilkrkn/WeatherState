@@ -22,8 +22,10 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     override val kodein by closestKodein()
     // Burada da WeatherStateApplication da bind(bağladığımız) CurrentWeatherViewModelFactory i tanımladık.
     private val viewModelFactory: CurrentWeatherViewModelFactory by instance()
-
+    // bu kısımda CurrentWeatherViewModel inin çağırdık ve bu sayede Api ve Database den çekilen verileri UI da gösterileceğiz.
     private lateinit var currentWeatherViewModel: CurrentWeatherViewModel
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,20 +54,20 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         })
 
 
-        currentWeather.observe(this@CurrentWeatherFragment, Observer {
-            if (it == null) return@Observer
+        currentWeather.observe(this@CurrentWeatherFragment, Observer { currentWeather ->
+            if (currentWeather == null) return@Observer
 
             group_loading.visibility = View.GONE
-            updateDatetoToday()
-            updateTemperatures(it.temperature, it.feelsLikeTemperature)
-            updateConditionText(it.conditionText)
-            updatePrecipitation(it.precipitationVolume)
-            updateWind(it.windDirection, it.windSpeed)
-            updateVisibility(it.visibilityDistance)
+            updateDateToToday()
+            updateTemperatures(currentWeather.temperature, currentWeather.feelsLikeTemperature)
+            updateConditionText(currentWeather.conditionText)
+            updatePrecipitation(currentWeather.precipitationVolume)
+            updateWind(currentWeather.windDirection, currentWeather.windSpeed)
+            updateVisibility(currentWeather.visibilityDistance)
 
 
             GlideApp.with(this@CurrentWeatherFragment)
-                    .load("http:${it.conditionIconUrl}")
+                    .load("http:${currentWeather.conditionIconUrl}")
                     .into(imageView_conditionIcon)
 
 
@@ -83,7 +85,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     //ActionBarda  günü  gösterdik.
-    private fun updateDatetoToday(){
+    private fun updateDateToToday(){
 
         (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "Today"
     }

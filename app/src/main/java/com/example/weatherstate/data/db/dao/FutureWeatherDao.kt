@@ -1,6 +1,7 @@
 package com.example.weatherstate.data.db.dao
 
 import androidx.lifecycle.LiveData
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -9,6 +10,7 @@ import com.example.weatherstate.data.db.unitlocalized.future.ImperialSimpleFutur
 import com.example.weatherstate.data.db.unitlocalized.future.MetricSimpleFutureWeatherEntry
 import org.threeten.bp.LocalDate
 
+@Dao
 interface FutureWeatherDao {
 
     // insert işlemlerinin yapıldığı bir fonksiyondur.
@@ -24,11 +26,11 @@ interface FutureWeatherDao {
     fun getSimpleFutureWeatherImperial(startDate: LocalDate): LiveData<List<ImperialSimpleFutureWeatherEntry>>
 
     // Buradaki sorgu günlere göre gelecek hava durumu bilgilerinin günlerini veri tabanından çekiyoruz. Bu şekilde gün gün gelecek hava durumu biliglerine erişimi sağlatmış oluyoruz.
-    @Query("select * from future_weather where date(date) >= date(:startDate)")
+    @Query("select count(futureId) from future_weather where date(date) >= date(:startDate)")
     fun countFutureWeather(startDate : LocalDate) : Int
 
     // Buradaki delete sorgu işlemi önceki güncelerden kala verileri silip güncel gelecek verileri eklemek için bu sorguyu kullanıyoruz.
-    @Query("delete from future_weather where daate(date) < date(:fistDateToKeep)")
+    @Query("delete from future_weather where date(date) < date(:fistDateToKeep)")
     fun deleteOldEntries(fistDateToKeep: LocalDate)
 
 }

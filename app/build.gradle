@@ -35,6 +35,10 @@ android {
         }
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
     buildFeatures {
         viewBinding true
     }
@@ -119,6 +123,8 @@ dependencies {
     //Groupie RecyclerView
     implementation "com.xwray:groupie:2.9.0"
     implementation "com.xwray:groupie-viewbinding:2.9.0"
+    implementation "com.xwray:groupie-viewbinding:2.9.0"
+    implementation "com.xwray:groupie-databinding:2.9.0"
     implementation "com.xwray:groupie-kotlin-android-extensions:2.9.0"
 
     //Preference
