@@ -6,8 +6,10 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.weatherstate.data.db.entity.FutureWeatherEntry
-import com.example.weatherstate.data.db.unitlocalized.future.ImperialSimpleFutureWeatherEntry
-import com.example.weatherstate.data.db.unitlocalized.future.MetricSimpleFutureWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.detail.ImperialDetailFutureWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.detail.MetricDetailFutureWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.list.ImperialSimpleFutureWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.list.MetricSimpleFutureWeatherEntry
 import org.threeten.bp.LocalDate
 
 @Dao
@@ -24,6 +26,12 @@ interface FutureWeatherDao {
     //Burada sql sorgusu yaparak oluşturuduğumuz Entity içerisindeki verilere erişerek ImperialSimpleFutureWeatherEntry deki verilere uygun olanları alıp LiveData içerisine koyup sonrada ui da canlı bir şekilde gözükmesi için yapıyoruz.
     @Query("select * from future_weather where date(date) >= date(:startDate)" )
     fun getSimpleFutureWeatherImperial(startDate: LocalDate): LiveData<List<ImperialSimpleFutureWeatherEntry>>
+
+    @Query("select * from future_weather where date(date) = date(:date)")
+    fun getDetailedWeatherByDateMetric(date: LocalDate): LiveData<MetricDetailFutureWeatherEntry>
+
+    @Query("select * from future_weather where date(date) = date(:date)")
+    fun getDetailedWeatherByDateImperial(date: LocalDate): LiveData<ImperialDetailFutureWeatherEntry>
 
     // Buradaki sorgu günlere göre gelecek hava durumu bilgilerinin günlerini veri tabanından çekiyoruz. Bu şekilde gün gün gelecek hava durumu biliglerine erişimi sağlatmış oluyoruz.
     @Query("select count(futureId) from future_weather where date(date) >= date(:startDate)")

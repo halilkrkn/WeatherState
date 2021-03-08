@@ -1,13 +1,11 @@
 package com.example.weatherstate.ui.weather.Future.list
 
-import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherstate.R
-import com.example.weatherstate.data.db.unitlocalized.future.MetricSimpleFutureWeatherEntry
-import com.example.weatherstate.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.list.MetricSimpleFutureWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import com.example.weatherstate.internal.glide.GlideApp
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import kotlinx.android.synthetic.main.future_list_weather_fragment.*
 import kotlinx.android.synthetic.main.item_future_weather.*
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle

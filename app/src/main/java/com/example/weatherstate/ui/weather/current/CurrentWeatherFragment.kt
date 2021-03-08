@@ -48,13 +48,13 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         val currentWeather = currentWeatherViewModel.weather.await()
         val weatherLocation = currentWeatherViewModel.weatherLocation.await()
 
-        weatherLocation.observe(this@CurrentWeatherFragment, Observer { location ->
+        weatherLocation.observe(viewLifecycleOwner, Observer { location ->
             if (location == null ) return@Observer
             updateLocation(location.name)
         })
 
 
-        currentWeather.observe(this@CurrentWeatherFragment, Observer { currentWeather ->
+        currentWeather.observe(viewLifecycleOwner, Observer { currentWeather ->
             if (currentWeather == null) return@Observer
 
             group_loading.visibility = View.GONE

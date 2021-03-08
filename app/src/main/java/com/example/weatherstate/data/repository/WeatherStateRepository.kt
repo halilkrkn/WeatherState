@@ -3,7 +3,8 @@ package com.example.weatherstate.data.repository
 import androidx.lifecycle.LiveData
 import com.example.weatherstate.data.db.entity.WeatherLocation
 import com.example.weatherstate.data.db.unitlocalized.current.UnitSpecificCurrentWeatherEntry
-import com.example.weatherstate.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.detail.UnitSpecificDetailFutureWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import org.threeten.bp.LocalDate
 
 //burda güncel haca durumu verileri için repository(depo) oluşturuyoruz.
@@ -16,4 +17,6 @@ interface WeatherStateRepository {
     suspend fun getWeatherLocation(): LiveData<WeatherLocation>
 
     suspend fun getFutureWeatherList(startDate: LocalDate,metric: Boolean): LiveData<out List<UnitSpecificSimpleFutureWeatherEntry>>
+
+    suspend fun getDetailFutureWeatherByDate(date: LocalDate, metric: Boolean): LiveData<out UnitSpecificDetailFutureWeatherEntry>
 }

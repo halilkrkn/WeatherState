@@ -1,20 +1,20 @@
 package com.example.weatherstate.ui.weather.Future.detail
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.weatherstate.data.provider.UnitProvider
 import com.example.weatherstate.data.repository.WeatherStateRepository
-import com.example.weatherstate.internal.lazyDeferred
-import com.example.weatherstate.ui.base.WeatherViewModel
 import org.threeten.bp.LocalDate
 
-class FutureDetailWeatherViewModel(
+class FutureDetailWeatherViewModelFactory(
         private val detailDate: LocalDate,
         private val weatherStateRepository: WeatherStateRepository,
-        unitProvider: UnitProvider
-) : WeatherViewModel(weatherStateRepository,unitProvider) {
+        private val unitProvider: UnitProvider
+): ViewModelProvider.NewInstanceFactory() {
 
-    val weather by lazyDeferred {
-        weatherStateRepository.getDetailFutureWeatherByDate(detailDate,super.isMetricUnit)
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return FutureDetailWeatherViewModel(detailDate, weatherStateRepository, unitProvider) as T
     }
 
 }

@@ -9,7 +9,7 @@ import org.threeten.bp.LocalDate
 
 class FutureListWeatherViewModel(
         private val weatherStateRepository: WeatherStateRepository,
-        private val unitProvider: UnitProvider
+         unitProvider: UnitProvider
 ) : WeatherViewModel(weatherStateRepository, unitProvider) {
 
     val weatherEntries by lazyDeferred {

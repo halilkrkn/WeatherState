@@ -9,7 +9,7 @@ import com.example.weatherstate.ui.base.WeatherViewModel
 
 class CurrentWeatherViewModel(
         private val weatherStateRepository: WeatherStateRepository,
-        private val unitProvider: UnitProvider
+        unitProvider: UnitProvider
 ) : WeatherViewModel(weatherStateRepository,unitProvider) {
 
 

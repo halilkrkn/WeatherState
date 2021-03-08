@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "f51f399fe80bbb63d0b34e1a101bddae",
+    "identityHash": "a894a6995cd454c2491f7f041af21e1c",
     "entities": [
       {
         "tableName": "current_weather",
@@ -115,6 +115,137 @@
         "foreignKeys": []
       },
       {
+        "tableName": "future_weather",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`futureId` INTEGER PRIMARY KEY AUTOINCREMENT, `date` TEXT NOT NULL, `avgtempC` REAL NOT NULL, `avgtempF` REAL NOT NULL, `avgvisKm` REAL NOT NULL, `avgvisMiles` REAL NOT NULL, `maxtempC` REAL NOT NULL, `maxtempF` REAL NOT NULL, `maxwindKph` REAL NOT NULL, `maxwindMph` REAL NOT NULL, `mintempC` REAL NOT NULL, `mintempF` REAL NOT NULL, `totalprecipMm` REAL NOT NULL, `totalprecipIn` REAL NOT NULL, `uv` REAL NOT NULL, `condition_code` INTEGER NOT NULL, `condition_cIcon` TEXT NOT NULL, `condition_text` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "futureId",
+            "columnName": "futureId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.avgtempC",
+            "columnName": "avgtempC",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.avgtempF",
+            "columnName": "avgtempF",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.avgvisKm",
+            "columnName": "avgvisKm",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.avgvisMiles",
+            "columnName": "avgvisMiles",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.maxtempC",
+            "columnName": "maxtempC",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.maxtempF",
+            "columnName": "maxtempF",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.maxwindKph",
+            "columnName": "maxwindKph",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.maxwindMph",
+            "columnName": "maxwindMph",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.mintempC",
+            "columnName": "mintempC",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.mintempF",
+            "columnName": "mintempF",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.totalprecipMm",
+            "columnName": "totalprecipMm",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.totalprecipIn",
+            "columnName": "totalprecipIn",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.uv",
+            "columnName": "uv",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.condition.code",
+            "columnName": "condition_code",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.condition.cIcon",
+            "columnName": "condition_cIcon",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day.condition.text",
+            "columnName": "condition_text",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "futureId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_future_weather_date",
+            "unique": true,
+            "columnNames": [
+              "date"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_future_weather_date` ON `${TABLE_NAME}` (`date`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
         "tableName": "weather_location",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`locationId` INTEGER NOT NULL, `country` TEXT NOT NULL, `lat` REAL NOT NULL, `localtimeEpoch` INTEGER NOT NULL, `lon` REAL NOT NULL, `name` TEXT NOT NULL, `region` TEXT NOT NULL, `tzId` TEXT NOT NULL, PRIMARY KEY(`locationId`))",
         "fields": [
@@ -175,167 +306,12 @@
         },
         "indices": [],
         "foreignKeys": []
-      },
-      {
-        "tableName": "future_weather",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `date` TEXT NOT NULL, `avgtempC` REAL NOT NULL, `avgtempF` REAL NOT NULL, `avgvisKm` REAL NOT NULL, `avgvisMiles` REAL NOT NULL, `dailyChanceOfRain` TEXT NOT NULL, `dailyChanceOfSnow` TEXT NOT NULL, `dailyWillİtRain` INTEGER NOT NULL, `dailyWillİtSnow` INTEGER NOT NULL, `maxtempC` REAL NOT NULL, `maxtempF` REAL NOT NULL, `maxwindKph` REAL NOT NULL, `maxwindMph` REAL NOT NULL, `mintempC` REAL NOT NULL, `mintempF` REAL NOT NULL, `totalprecipMm` REAL NOT NULL, `totalprecipİn` REAL NOT NULL, `uv` REAL NOT NULL, `condition_code` INTEGER NOT NULL, `condition_cIcon` TEXT NOT NULL, `condition_text` TEXT NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "date",
-            "columnName": "date",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.avgtempC",
-            "columnName": "avgtempC",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.avgtempF",
-            "columnName": "avgtempF",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.avgvisKm",
-            "columnName": "avgvisKm",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.avgvisMiles",
-            "columnName": "avgvisMiles",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.dailyChanceOfRain",
-            "columnName": "dailyChanceOfRain",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.dailyChanceOfSnow",
-            "columnName": "dailyChanceOfSnow",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.dailyWillİtRain",
-            "columnName": "dailyWillİtRain",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.dailyWillİtSnow",
-            "columnName": "dailyWillİtSnow",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.maxtempC",
-            "columnName": "maxtempC",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.maxtempF",
-            "columnName": "maxtempF",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.maxwindKph",
-            "columnName": "maxwindKph",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.maxwindMph",
-            "columnName": "maxwindMph",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.mintempC",
-            "columnName": "mintempC",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.mintempF",
-            "columnName": "mintempF",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.totalprecipMm",
-            "columnName": "totalprecipMm",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.totalprecipİn",
-            "columnName": "totalprecipİn",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.uv",
-            "columnName": "uv",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.condition.code",
-            "columnName": "condition_code",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.condition.cIcon",
-            "columnName": "condition_cIcon",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "day.condition.text",
-            "columnName": "condition_text",
-            "affinity": "TEXT",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": true
-        },
-        "indices": [
-          {
-            "name": "index_future_weather_date",
-            "unique": true,
-            "columnNames": [
-              "date"
-            ],
-            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_future_weather_date` ON `${TABLE_NAME}` (`date`)"
-          }
-        ],
-        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f51f399fe80bbb63d0b34e1a101bddae')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a894a6995cd454c2491f7f041af21e1c')"
     ]
   }
 }

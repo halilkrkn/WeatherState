@@ -20,7 +20,7 @@ import com.example.weatherstate.data.db.entity.WeatherLocation
 // Veritabanına ana erişim noktasıdır. @Database annotation’ı ile kullanılır.
 @Database(
         entities = [CurrentWeatherEntry::class,FutureWeatherEntry::class,WeatherLocation::class],
-        version = 1
+        version = 2
 
 )
 //Database sınıfımız abstract olmalı ve RoomDatabase‘den türetilmelidir.

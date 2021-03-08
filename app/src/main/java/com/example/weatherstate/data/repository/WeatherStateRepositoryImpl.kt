@@ -7,7 +7,8 @@ import com.example.weatherstate.data.db.dao.FutureWeatherDao
 import com.example.weatherstate.data.db.dao.WeatherLocationDao
 import com.example.weatherstate.data.db.entity.WeatherLocation
 import com.example.weatherstate.data.db.unitlocalized.current.UnitSpecificCurrentWeatherEntry
-import com.example.weatherstate.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.detail.UnitSpecificDetailFutureWeatherEntry
+import com.example.weatherstate.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import com.example.weatherstate.data.network.FORECAST_DAYS_COUNT
 import com.example.weatherstate.data.network.WeatherNetworkDataSource
 import com.example.weatherstate.data.network.response.CurrentWeatherResponse
@@ -34,20 +35,12 @@ class WeatherStateRepositoryImpl(
     // TODO: ******** getCurrentWeather fonksiyonu implementi*********
     // implemente ettiğimiz özellik olan getCurrentWeather ı uı da gösterebilmek için currentWeatherDao da oluşturduğumuz getWeatherMetric() fonksiyonunu  tanımladık ki oradaki istenilen verileri uı ui da gösteerelim
     override suspend fun getCurrentWeather(metric: Boolean): LiveData<out UnitSpecificCurrentWeatherEntry> {
-        initialWeatherData()
+
         return withContext(Dispatchers.IO){
+            initialWeatherData()
             return@withContext if (metric) currentWeatherDao.getWeatherMetric()
             else currentWeatherDao.getWeatherImperial()
 
-        }
-    }
-
-
-    // TODO: ******** getWeatherLocation fonksiyonu implementi*********
-    // Bu fonksiyonu WeatherStateRepository interface inden implmenete ederek getWeatherLocation fonksiyonunu yönetebileceğiz ve oradaki bilgileri Uı da kullanabileceğiz.
-    override suspend fun getWeatherLocation(): LiveData<WeatherLocation> {
-        return withContext(Dispatchers.IO){
-            return@withContext weatherLocationDao.getLocation()
         }
     }
 
@@ -60,6 +53,25 @@ class WeatherStateRepositoryImpl(
         }
     }
 
+    // TODO: ******** getDetailFutureWeatherByDate fonksiyonu implementi*********
+    override suspend fun getDetailFutureWeatherByDate(
+            startDate: LocalDate,
+            metric: Boolean
+    ): LiveData<out UnitSpecificDetailFutureWeatherEntry> {
+        return withContext(Dispatchers.IO){
+            initialWeatherData()
+            return@withContext if(metric) futureWeatherDao.getDetailedWeatherByDateMetric(startDate)
+            else futureWeatherDao.getDetailedWeatherByDateImperial(startDate)
+        }
+    }
+
+    // TODO: ******** getWeatherLocation fonksiyonu implementi*********
+    // Bu fonksiyonu WeatherStateRepository interface inden implmenete ederek getWeatherLocation fonksiyonunu yönetebileceğiz ve oradaki bilgileri Uı da kullanabileceğiz.
+    override suspend fun getWeatherLocation(): LiveData<WeatherLocation> {
+        return withContext(Dispatchers.IO){
+            return@withContext weatherLocationDao.getLocation()
+        }
+    }
 
     // Burada ise persistFetchedCurrentWeather fonk. na yeni hava durumu verilerini atadık.
     init {
@@ -114,20 +126,24 @@ class WeatherStateRepositoryImpl(
         //burada WeatherLocation classında yapmış olduğumuz zonedDateTime ı çektik.
         if (isFetchCurrentNeeded(lastWeatherLocation.zonedDateTime))
             fetchCurrentWeather()
+
+        if(isFetchFutureNeeded())
             fetchFutureWeather()
     }
 
 
     //Güncel hava durumu bilgilerini getirmek için location ve language tanımladık.
     private suspend fun fetchCurrentWeather(){
-        weatherNetworkDataSource.fetchCurrentWeather(locationProvider.getPreferredLocationString(),
+        weatherNetworkDataSource.fetchCurrentWeather(
+                locationProvider.getPreferredLocationString(),
                 Locale.getDefault().language
         )
     }
 
     //Gelecek hava durumu bilgilerini getirmek için location ve language tanımladık.
     private suspend fun fetchFutureWeather(){
-        weatherNetworkDataSource.fetchFutureWeather(locationProvider.getPreferredLocationString(),
+        weatherNetworkDataSource.fetchFutureWeather(
+                locationProvider.getPreferredLocationString(),
                 Locale.getDefault().language
         )
     }
