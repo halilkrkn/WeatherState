@@ -5,7 +5,8 @@
 
  # Bu uygulamada; 
 
-- **UI için** Android Architecture Components içerisinde bulunan **Coroutines**, **LiveData**, **Lifecycle** - **ViewModel**, **Fragment**,**Navigation**, **Material Design** yapısını, Android Dependency Injection olan **Kodein** (Kotlin Dependency Injection) Library i,
+- **UI için** Android Architecture Components içerisinde bulunan **Coroutines**, **LiveData**, **Lifecycle** - **ViewModel**, **Fragment**,**Navigation**, **Material Design** yapısını, 
+- Android **Kotlin Dependency Injection** olan **Kodein** (Kotlin Dependency Injection) Library i,
 - **Api üzerinden veri çekmek** için **Retrofit** ve **Gson** yapısını, 
 - **Image dosyalarını apiden çekebilmek** için **Glide'ı**,
 - **Uygulama içerisindeki verileri listeleyebilmek** için **Groupie RecyclerView**,
