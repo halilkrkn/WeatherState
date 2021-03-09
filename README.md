@@ -63,6 +63,6 @@
 
 # Kaynaklar:
 
-- Bu uygulamayı yapmak için ResoCoder Kanalının yapmış olduğu  Forecast App - Android Kotlin MVVM Tutorial Course dan faydalanarak bu yapıları ve MVVM mimarisini, Room DataBase ve Navigation Components İşlemlerini, KODEIN yapısını, Retrofit ve Gson kullanımı daha derinden öğrenme fırsatına eriştim ve kendimi bu alan da artık daha geliştirdiğimi düşünüyorum. 
+- Bu uygulamayı yapmak için ResoCoder Kanalının yapmış olduğu  Forecast App - Android Kotlin MVVM Tutorial Course dan faydalanarak bu yapıları ve MVVM mimarisini, Room DataBase ve Navigation Components İşlemlerini, KODEIN yapısını, Retrofit ve Gson kullanımı daha derinden öğrenme fırsatına eriştim ve kendimi bu alan da artık daha etkili bir şekilde geliştirdiğimi düşünüyorum. 
 - Bknz: https://www.youtube.com/playlist?list=PLB6lc7nQ1n4jTLDyU2muTBo8xk0dg0D_w
 - Bknz: https://resocoder.com/2018/10/21/android-kotlin-forecast-app-01-navigation-app-foundation-mvvm-tutorial-course/
