@@ -9,7 +9,7 @@
 - Android **Kotlin Dependency Injection** olan **Kodein** (Kotlin Dependency Injection) Library i,
 - **Api üzerinden veri çekmek** için **Retrofit** ve **Gson** yapısını, 
 - **Image dosyalarını apiden çekebilmek** için **Glide'ı**,
-- **Uygulama içerisindeki verileri listeleyebilmek** için **Groupie RecyclerView**,
+- **Uygulama içerisindeki verileri UI da listeleyebilmek** için **Groupie RecyclerView**,
 - **Api den çektiğimiz verileri database eklemek için** sqlite tabanlı **Room database** ini kullanarak uygulama MVVM mimarisi içerisinde yapıldı.
 
  
