@@ -1,6 +1,6 @@
 # WeatherState
  
-- Bu uygulamada Android Architecture Components lerden olan MVVM mimarisini kullanarak Hava Durumu uygulamasıdır.
+- Bu uygulama Android Architecture Components lerden olan MVVM mimarisini kullanarak yapılan bir Hava Durumu uygulamasıdır.
 - MVVM mimarisi yani Model-View-ViewModel yapısını kullarak katmanlı bir mimari içerisinde kodları daha sade, kaliteli, verimliliği yüksek, sürdürülebilir ve test edilir bir uygulama yapmamıza olanak sağlıyor. 
 - 
  # Bu uygulamada; 
