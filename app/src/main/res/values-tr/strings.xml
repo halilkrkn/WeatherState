@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hava Durumu</string>
+    <string name="feels_like">His. Sıcaklık</string>
+    <string name="wind">Rüzgar Hızı:</string>
+    <string name="precipitation">Yağış Miktarı:</string>
+    <string name="visibility">Görünürlük:</string>
+    <string name="loading">Yükleniyor…</string>
+
+    <string name="today">Bugün</string>
+    <string name="sevenDays">7 Gün</string>
+    <string name="settings">Ayarlar</string>
+
+    <string name="locationTitle">Hava Durumu Konum Ayarları</string>
+    <string name="deviceLocation">Cihaz Konumunu Kullan</string>
+    <string name="location">Konum</string>
+    <string name="weatherLocation">Hava durumunun görüntülendiği konum</string>
+    <string name="units">Birimler</string>
+    <string name="unitSystem">Ölçü Birimleri</string>
+    <string name="deviceLocationSummary">Uygulamanın konumunuzu almasına izin verin</string>
+
+    <string name="METRIC">METRIC</string>
+    <string name="IMPERIAL">IMPERIAL</string>
+    <string name="metric">°C</string>
+    <string name="imperial">°F</string>
+
+    <string name="nextWeek">Gelecek Hafta</string>
+    <string name="toastMessage">Konumu ayarlardan manuel olarak ayarlayabilirsiniz</string>
+
+</resources>

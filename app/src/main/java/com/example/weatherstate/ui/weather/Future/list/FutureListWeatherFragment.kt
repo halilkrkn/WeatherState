@@ -70,11 +70,12 @@ class FutureListWeatherFragment: ScopedFragment(), KodeinAware {
 
 
     private fun updateLocation(location: String) {
+
         (activity as? AppCompatActivity)?.supportActionBar?.title = location
     }
 
     private fun updateDateToNextWeek() {
-        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "Next Week"
+        (activity as? AppCompatActivity)?.supportActionBar?.setSubtitle(R.string.nextWeek)
     }
 
     // Bu kısımda recyclerview için oluşturduğumuz FutureWeatherItem adapter i için UnitSpecificSimpleFutureWeatherEntry i listeye koyduk ve  FutureWeatherItem a map işlemine sokmuş olduk.

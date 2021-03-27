@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">WeatherState</string>
+    <string name="feels_like">Feels Like</string>
+    <string name="wind">Wind:</string>
+    <string name="precipitation">Precipitation:</string>
+    <string name="visibility">Visibility:</string>
+    <string name="loading">Loading…</string>
+
+    <string name="locationTitle">Weather Location</string>
+    <string name="deviceLocation">Use Device Location</string>
+    <string name="location">Location</string>
+    <string name="weatherLocation">The location for which the weather is displayed</string>
+    <string name="units">Units</string>
+    <string name="unitSystem">Unit System</string>
+    <string name="deviceLocationSummary">Allow the app to get your location</string>
+
+    <string name="METRIC">METRIC</string>
+    <string name="IMPERIAL">IMPERIAL</string>
+    <string name="metric">°C</string>
+    <string name="imperial">°F</string>
+
+    <string name="today">Today</string>
+    <string name="sevenDays">7 Days</string>
+    <string name="settings">Settings</string>
+
+    <string name="nextWeek">Next Week</string>
+    <string name="toastMessage">You can manually adjust the location from the settings</string>
+
+
+
+
+
 </resources>

@@ -54,20 +54,20 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         })
 
 
-        currentWeather.observe(viewLifecycleOwner, Observer { currentWeather ->
-            if (currentWeather == null) return@Observer
+        currentWeather.observe(viewLifecycleOwner, Observer { currentWeatherEntry ->
+            if (currentWeatherEntry == null) return@Observer
 
             group_loading.visibility = View.GONE
             updateDateToToday()
-            updateTemperatures(currentWeather.temperature, currentWeather.feelsLikeTemperature)
-            updateConditionText(currentWeather.conditionText)
-            updatePrecipitation(currentWeather.precipitationVolume)
-            updateWind(currentWeather.windDirection, currentWeather.windSpeed)
-            updateVisibility(currentWeather.visibilityDistance)
+            updateTemperatures(currentWeatherEntry.temperature, currentWeatherEntry.feelsLikeTemperature)
+            updateConditionText(currentWeatherEntry.conditionText)
+            updatePrecipitation(currentWeatherEntry.precipitationVolume)
+            updateWind(currentWeatherEntry.windDirection, currentWeatherEntry.windSpeed)
+            updateVisibility(currentWeatherEntry.visibilityDistance)
 
 
             GlideApp.with(this@CurrentWeatherFragment)
-                    .load("http:${currentWeather.conditionIconUrl}")
+                    .load("http:${currentWeatherEntry.conditionIconUrl}")
                     .into(imageView_conditionIcon)
 
 
@@ -84,36 +84,41 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         (activity as? AppCompatActivity)?.supportActionBar?.title = location
     }
 
+
     //ActionBarda  günü  gösterdik.
     private fun updateDateToToday(){
 
-        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "Today"
+            (activity as? AppCompatActivity)?.supportActionBar?.setSubtitle(R.string.today)
+
     }
 
+//    Feels Like
     private fun updateTemperatures(temperature: Double, feelsLike: Double){
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("°C","°F")
         textView_temperature.text ="$temperature$unitAbbreviation"
-        textView_feels_like_temperature.text ="Feels Like $feelsLike$unitAbbreviation"
+        textView_feels_like_temperature.text ="$feelsLike$unitAbbreviation"
     }
 
     private fun updateConditionText(conditionText: String){
         textView_weather_conditionText.text = conditionText
     }
 
+//    Precipitation
     private fun updatePrecipitation(precipitationVolume: Double){
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("mm","in")
-        textView_precipitation.text = "Precipitation: $precipitationVolume $unitAbbreviation"
+        textView_precipitation.text = "$precipitationVolume $unitAbbreviation"
 
     }
-
+//    Wind:
     private fun updateWind(windDirection:String, windSpeed: Double){
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("kph","mph")
-        textView_wind.text = "Wind: $windDirection $windSpeed $unitAbbreviation"
+        textView_wind.text = "$windDirection $windSpeed $unitAbbreviation"
     }
 
+//    Visibility
     private fun updateVisibility(visibilityDistance: Double){
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("km","miles")
-        textView_visibility.text = "Visibility: $visibilityDistance $unitAbbreviation"
+        textView_visibility.text = " $visibilityDistance $unitAbbreviation"
 
     }
 

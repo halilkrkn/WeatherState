@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="unitSystemValues">
-        <item>METRIC</item>
-        <item>IMPERIAL</item>
+        <item>@string/METRIC</item>
+        <item>@string/IMPERIAL</item>
     </string-array>
 
     <string-array name="unitSystemEntries">
-        <item>Metric</item>
-        <item>Imperial</item>
+        <item>@string/metric</item>
+        <item>@string/imperial</item>
     </string-array>
 </resources>

@@ -46,7 +46,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Loading"
+        android:text="@string/loading"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,62 +98,121 @@
         tools:text="25.0°C" />
 
     <TextView
-        android:id="@+id/textView_feels_like_temperature"
-        android:layout_width="136dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/textView_feels_like_temperature1"
+        android:layout_width="98dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/feels_like"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView_temperature"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_temperature"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="  Feels Like 20.4°C" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_temperature" />
+
 
     <TextView
-        android:id="@+id/textView_wind"
-        android:layout_width="172dp"
-        android:layout_height="33dp"
+        android:id="@+id/textView_feels_like_temperature"
+        android:layout_width="75dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="6dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_feels_like_temperature1"
+        app:layout_constraintEnd_toEndOf="@+id/textView_temperature"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView_feels_like_temperature1"
+        app:layout_constraintTop_toTopOf="@+id/textView_feels_like_temperature1"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="20.4°C" />
+
+    <TextView
+        android:id="@+id/textView_wind1"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:text="@string/wind"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        tools:text=" Wind: SE, 5.3 m/s" />
+        app:layout_constraintVertical_bias="0.593" />
+
+    <TextView
+        android:id="@+id/textView_precipitation1"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/precipitation"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView_visibility1"
+        app:layout_constraintEnd_toStartOf="@+id/progressBar_loading"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView_wind1"
+        app:layout_constraintTop_toTopOf="@+id/textView_wind1"
+        app:layout_constraintVertical_bias="0.222" />
+
+    <TextView
+        android:id="@+id/textView_visibility1"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:text="@string/visibility"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.746" />
 
     <TextView
         android:id="@+id/textView_precipitation"
-        android:layout_width="172dp"
-        android:layout_height="33dp"
+        android:layout_width="115dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="44dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView_wind"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView_wind"
+        app:layout_constraintTop_toTopOf="@+id/textView_wind"
+        tools:text=" 5 mm" />
+
+    <TextView
+        android:id="@+id/textView_wind"
+        android:layout_width="115dp"
+        android:layout_height="30dp"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintHorizontal_bias="0.79"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559"
-        tools:text=" Precipitation: 5 mm" />
+        app:layout_constraintVertical_bias="0.593"
+        tools:text="5.3 m/s" />
 
     <TextView
         android:id="@+id/textView_visibility"
-        android:layout_width="172dp"
-        android:layout_height="33dp"
+        android:layout_width="115dp"
+        android:layout_height="30dp"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintHorizontal_bias="0.79"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.625"
-        tools:text=" Visibility: 20 km" />
+        app:layout_constraintVertical_bias="0.746"
+        tools:text="  20 km" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

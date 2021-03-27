@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="Weather Location">
+        android:title="@string/locationTitle">
     <SwitchPreference
         android:key="USE_DEVICE_LOCATION"
-        android:title="Use Device Location"
-        android:summary="Allow the app to get your location"
+        android:title="@string/deviceLocation"
+        android:summary="@string/deviceLocationSummary"
         android:defaultValue="true"
         android:disableDependentsState="true"/>
 
     <EditTextPreference
         android:key="CUSTOM_LOCATION"
-        android:title="Location"
-        android:summary="The location for which the weather is displayed"
+        android:title="@string/location"
+        android:summary="@string/weatherLocation"
         android:defaultValue="Osmaniye"
         android:dependency="USE_DEVICE_LOCATION"/>
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Units">
+        android:title="@string/units">
         <ListPreference
             android:key="UNIT_SYSTEM"
-            android:title="Unit System"
+            android:title="@string/unitSystem"
             android:summary="%s"
-            android:defaultValue="METRIC"
+            android:defaultValue="@string/METRIC"
             android:entries="@array/unitSystemEntries"
             android:entryValues="@array/unitSystemValues"/>
 

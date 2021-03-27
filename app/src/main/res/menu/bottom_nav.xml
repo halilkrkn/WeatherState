@@ -5,17 +5,17 @@
     <item
         android:id="@+id/currentWeatherFragment"
         android:icon="@drawable/ic_baseline_today_24"
-        android:title="Today"
+        android:title="@string/today"
         />
     <item
         android:id="@+id/futureListWeatherFragment"
         android:icon="@drawable/ic_baseline_settings_system_daydream_24"
-        android:title="7 Days"
+        android:title="@string/sevenDays"
         />
     <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_baseline_settings_brightness_24"
-        android:title="Settings"
+        android:title="@string/settings"
         />
 
 </menu>

@@ -55,7 +55,7 @@ class FutureDetailWeatherFragment : ScopedFragment(),KodeinAware {
     }
 
     private fun bindUI() = launch(Dispatchers.Main) {
-        val futureweather = viewModel.weather.await()
+        val futureWeather = viewModel.weather.await()
         val weatherLocation = viewModel.weatherLocation.await()
 
         weatherLocation.observe(viewLifecycleOwner, Observer{ location ->
@@ -63,7 +63,7 @@ class FutureDetailWeatherFragment : ScopedFragment(),KodeinAware {
             updateLocation(location.name)
         })
 
-        futureweather.observe(viewLifecycleOwner, Observer{ weatherEntry ->
+        futureWeather.observe(viewLifecycleOwner, Observer{ weatherEntry ->
             if (weatherEntry == null) return@Observer
 
             group_loading_detail.visibility = View.GONE
@@ -115,20 +115,23 @@ class FutureDetailWeatherFragment : ScopedFragment(),KodeinAware {
         textView_weather_conditionText.text = conditionText
     }
 
+//    Precipitation:
     private fun updatePrecipitation(precipitationVolume: Double){
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("mm","in")
-        textView_precipitation.text = "Precipitation: $precipitationVolume $unitAbbreviation"
+        textView_precipitation.text = " $precipitationVolume $unitAbbreviation"
 
     }
 
+//    Wind Speed:
     private fun updateWindSpeed(windSpeed: Double){
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("kph","mph")
-        textView_wind.text = "Wind Speed: $windSpeed $unitAbbreviation"
+        textView_wind.text = " $windSpeed $unitAbbreviation"
     }
 
+//    Visibility:
     private fun updateVisibility(visibilityDistance: Double){
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("km","miles")
-        textView_visibility.text = "Visibility: $visibilityDistance $unitAbbreviation"
+        textView_visibility.text = " $visibilityDistance $unitAbbreviation"
     }
 
 }

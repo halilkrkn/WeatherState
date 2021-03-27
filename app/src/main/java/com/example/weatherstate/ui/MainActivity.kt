@@ -1,6 +1,7 @@
 package com.example.weatherstate.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -87,6 +88,7 @@ class MainActivity : AppCompatActivity(), KodeinAware{
        )
     }
 
+    @SuppressLint("MissingSuperCall")
     override fun onRequestPermissionsResult(
             requestCode: Int,
             permissions: Array<out String>,
@@ -96,7 +98,7 @@ class MainActivity : AppCompatActivity(), KodeinAware{
             if (grantResults.isEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 bindLocationManager()
             else
-                Toast.makeText(this, "Please, set location manually in settings", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.toastMessage, Toast.LENGTH_SHORT).show()
         }
     }
 
